@@ -22,7 +22,7 @@ public class Clovis {
                 int index = Integer.parseInt(markOrUnmark[1]);
                 if (markOrUnmark[0].equalsIgnoreCase("mark")) {
                     System.out.println("Nice! I've marked this task as done:");
-                    Task task = list.get(index);
+                    Task task = list.get(index-1);
                     task.markAsDone();
                     System.out.println(task.toString());
                 } else if (markOrUnmark[0].equalsIgnoreCase("unmark")) {
@@ -34,8 +34,24 @@ public class Clovis {
             } else if (input.equalsIgnoreCase("bye")) {
                 break;
             } else {
-                list.add(new Task(input));
-                System.out.println("added: " + input);
+                String[] splitInput = input.split(" ", 2);
+                String taskType = splitInput[0];
+                String description = splitInput.length > 1 ? splitInput[1] : "";
+                if (taskType.equalsIgnoreCase("todo")) {
+                    list.add(new ToDos(description));
+                } else if (taskType.equalsIgnoreCase("deadline")) {
+                    String[] splitDescription = description.split("/by ", 2);
+                    list.add(new Deadlines(splitDescription[0], splitDescription[1]));
+                } else if (taskType.equalsIgnoreCase("event")) {
+                    String[] splitDescription = description.split("/from | /to ");
+                    list.add(new Events(splitDescription[0], splitDescription[1], splitDescription[2]));
+                } else {
+                    list.add(new Task(input));
+                }
+                System.out.println("Got it. I've added this task:");
+                Task addedTask = list.get(list.size()-1);
+                System.out.println("    " + addedTask.toString());
+                System.out.println("Now you have " + list.size() + " tasks in the list.");
             }
         }
         System.out.println("Bye. Hope to see you again soon!");
