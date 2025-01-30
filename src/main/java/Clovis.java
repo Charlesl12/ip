@@ -75,15 +75,9 @@ public class Clovis {
                             }
                             list.add(new ToDos(description));
                         } else if (taskType.equalsIgnoreCase("deadline")) {
-                            if (description.isEmpty()) {
-                                throw new ClovisException("Unacceptable, a description and /by date are required for a deadline");
-                            }
                             String[] splitDescription = description.split("/by ", 2);
                             list.add(new Deadlines(splitDescription[0], splitDescription[1]));
                         } else if (taskType.equalsIgnoreCase("event")) {
-                            if (description.isEmpty()) {
-                                throw new ClovisException("Unacceptable, a description, /from and /to date are required for an event");
-                            }
                             String[] splitDescription = description.split("/from | /to ");
                             list.add(new Events(splitDescription[0], splitDescription[1], splitDescription[2]));
                         }
@@ -98,6 +92,8 @@ public class Clovis {
                 }
             } catch (ClovisException e) {
                 System.out.println(e.getMessage());
+            } catch (ArrayIndexOutOfBoundsException e) {
+                System.out.println("Missing details");
             }
         }
     }
