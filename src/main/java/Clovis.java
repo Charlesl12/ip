@@ -35,6 +35,14 @@ public class Clovis {
                         task.markAsNotDone();
                         System.out.println(task);
                     }
+                } else if (input.contains("delete")) {
+                    String[] deleteIndex = input.split(" ");
+                    int index = Integer.parseInt(deleteIndex[1]) - 1;
+                    Task task = list.get(index);
+                    list.remove(index);
+                    System.out.println("Noted. I've removed this task:");
+                    System.out.println(task);
+                    System.out.println("Now you have " + list.size() + " tasks in the list.");
                 } else if (input.equalsIgnoreCase("bye")) {
                     break;
                 } else {
