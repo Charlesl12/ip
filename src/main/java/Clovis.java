@@ -73,13 +73,13 @@ public class Clovis {
                             if (description.isEmpty()) {
                                 throw new ClovisException("Unacceptable, a description is required for a todo");
                             }
-                            list.add(new ToDos(description));
+                            list.add(new ToDo(description));
                         } else if (taskType.equalsIgnoreCase("deadline")) {
                             String[] splitDescription = description.split("/by ", 2);
-                            list.add(new Deadlines(splitDescription[0], splitDescription[1]));
+                            list.add(new Deadline(splitDescription[0], splitDescription[1]));
                         } else if (taskType.equalsIgnoreCase("event")) {
                             String[] splitDescription = description.split("/from | /to ");
-                            list.add(new Events(splitDescription[0], splitDescription[1], splitDescription[2]));
+                            list.add(new Event(splitDescription[0], splitDescription[1], splitDescription[2]));
                         }
                         System.out.println("Got it. I've added this task:");
                         Task addedTask = list.get(list.size() - 1);
