@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.io.IOException;
 
 public class Storage {
-    private static final String FILE_PATH = "data/tasks.txt";
+    private static final String FILE_PATH = "./data/tasks.txt";
 
     public static ArrayList<Task> loadTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
@@ -52,7 +52,7 @@ public class Storage {
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
             for (Task task : tasks) {
                 bw.write(task.toFileFormat());
-                bw.newLine();   
+                bw.newLine();
             }
             bw.close();
         } catch (IOException e) {

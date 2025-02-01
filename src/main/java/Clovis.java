@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Clovis {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        ArrayList<Task> list = new ArrayList<>(100);
+        ArrayList<Task> list = Storage.loadTasks();
         System.out.println("Hello! I'm Clovis.\nWhat can I do for you?");
 
         enum Command {
@@ -42,6 +42,7 @@ public class Clovis {
                         }
                         break;
                     case BYE:
+                        Storage.saveTasks(list);
                         System.out.println("Bye. Hope to see you again soon!");
                         return;
                     case MARK:
@@ -90,6 +91,7 @@ public class Clovis {
                     default:
                         throw new ClovisException("I have no idea what that means...");
                 }
+                Storage.saveTasks(list);
             } catch (ClovisException e) {
                 System.out.println(e.getMessage());
             } catch (ArrayIndexOutOfBoundsException e) {
