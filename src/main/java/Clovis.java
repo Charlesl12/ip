@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.time.LocalDateTime;
 
 public class Clovis {
     public static void main(String[] args) throws IOException {
@@ -77,9 +78,15 @@ public class Clovis {
                             list.add(new ToDo(description));
                         } else if (taskType.equalsIgnoreCase("deadline")) {
                             String[] splitDescription = description.split("/by ", 2);
+                            if (description.isEmpty() || splitDescription.length < 2) {
+                                throw new ClovisException("Unacceptable, a description and /by date are required for a deadline");
+                            }
                             list.add(new Deadline(splitDescription[0], splitDescription[1]));
                         } else if (taskType.equalsIgnoreCase("event")) {
                             String[] splitDescription = description.split("/from | /to ");
+                            if (description.isEmpty() || splitDescription.length < 3) {
+                                throw new ClovisException("Unacceptable, a description, /from and /to date are required for an event");
+                            }
                             list.add(new Event(splitDescription[0], splitDescription[1], splitDescription[2]));
                         }
                         System.out.println("Got it. I've added this task:");
