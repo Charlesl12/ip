@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Clovis {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        ArrayList<Task> list = new ArrayList<>(100);
+        ArrayList<Task> list = Storage.loadTasks();
         System.out.println("Hello! I'm Clovis.\nWhat can I do for you?");
 
         enum Command {
@@ -42,6 +42,7 @@ public class Clovis {
                         }
                         break;
                     case BYE:
+                        Storage.saveTasks(list);
                         System.out.println("Bye. Hope to see you again soon!");
                         return;
                     case MARK:
@@ -73,13 +74,13 @@ public class Clovis {
                             if (description.isEmpty()) {
                                 throw new ClovisException("Unacceptable, a description is required for a todo");
                             }
-                            list.add(new ToDos(description));
+                            list.add(new ToDo(description));
                         } else if (taskType.equalsIgnoreCase("deadline")) {
                             String[] splitDescription = description.split("/by ", 2);
-                            list.add(new Deadlines(splitDescription[0], splitDescription[1]));
+                            list.add(new Deadline(splitDescription[0], splitDescription[1]));
                         } else if (taskType.equalsIgnoreCase("event")) {
                             String[] splitDescription = description.split("/from | /to ");
-                            list.add(new Events(splitDescription[0], splitDescription[1], splitDescription[2]));
+                            list.add(new Event(splitDescription[0], splitDescription[1], splitDescription[2]));
                         }
                         System.out.println("Got it. I've added this task:");
                         Task addedTask = list.get(list.size() - 1);
@@ -90,6 +91,7 @@ public class Clovis {
                     default:
                         throw new ClovisException("I have no idea what that means...");
                 }
+                Storage.saveTasks(list);
             } catch (ClovisException e) {
                 System.out.println(e.getMessage());
             } catch (ArrayIndexOutOfBoundsException e) {
