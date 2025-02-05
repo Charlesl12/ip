@@ -7,17 +7,20 @@ import java.util.ArrayList;
 import java.io.IOException;
 
 public class Storage {
-    private static final String FILE_PATH = "./data/tasks.txt";
+    private final String filePath;
 
-    public static ArrayList<Task> loadTasks() {
+    public Storage (String filePath) {
+        this.filePath = filePath;
+    }
+    public ArrayList<Task> loadTasks() throws ClovisException {
         ArrayList<Task> tasks = new ArrayList<>();
-        File file = new File(FILE_PATH);
-
+        File file = new File(filePath);
         if(!file.exists()) {
+            file.getParentFile().mkdirs();
             return tasks;
         }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(FILE_PATH))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
                 String[] data = line.split(" \\| ");
@@ -39,24 +42,21 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            System.out.println("Error reading file: " + FILE_PATH);
+            throw new ClovisException("Error reading file: " + e.getMessage());
         }
         return tasks;
     }
 
-    public static void saveTasks(ArrayList<Task> tasks) {
+    public void saveTasks(ArrayList<Task> tasks) throws ClovisException {
         try {
-            File file = new File(FILE_PATH);
-            file.getParentFile().mkdirs();
-
-            BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+            BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
             for (Task task : tasks) {
                 bw.write(task.toFileFormat());
                 bw.newLine();
             }
             bw.close();
         } catch (IOException e) {
-            System.out.println("Error saving file: " + FILE_PATH);
+            throw new ClovisException("Error saving file: " + e.getMessage());
         }
     }
 }
