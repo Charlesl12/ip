@@ -1,3 +1,9 @@
+package clovis.command;
+
+import clovis.*;
+import clovis.task.Task;
+import clovis.task.TaskList;
+
 public abstract class AddCommand extends Command {
     protected String description;
 

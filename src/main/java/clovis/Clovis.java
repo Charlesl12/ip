@@ -1,3 +1,8 @@
+package clovis;
+
+import clovis.command.Command;
+import clovis.task.TaskList;
+
 public class Clovis {
     private Storage storage;
     private TaskList tasks;

@@ -1,3 +1,7 @@
+package clovis.task;
+
+import clovis.ClovisException;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -8,7 +12,7 @@ public class Deadline extends Task {
     private final static DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
     private final static DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM/d/yyyy HHmm");
 
-    public Deadline(String description, String dateTime) throws ClovisException{
+    public Deadline(String description, String dateTime) throws ClovisException {
         super(description);
         try {
             this.deadline = LocalDateTime.parse(dateTime, INPUT_FORMAT);

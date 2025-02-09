@@ -1,3 +1,10 @@
+package clovis;
+
+import clovis.task.Deadline;
+import clovis.task.Event;
+import clovis.task.Task;
+import clovis.task.ToDo;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;

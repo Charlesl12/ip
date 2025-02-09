@@ -1,3 +1,10 @@
+package clovis.command;
+
+import clovis.*;
+import clovis.task.Event;
+import clovis.task.Task;
+import clovis.task.TaskList;
+
 public class AddEventCommand extends AddCommand {
     private String start;
     private String end;

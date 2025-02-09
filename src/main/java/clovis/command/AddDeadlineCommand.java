@@ -1,3 +1,10 @@
+package clovis.command;
+
+import clovis.*;
+import clovis.task.Deadline;
+import clovis.task.Task;
+import clovis.task.TaskList;
+
 public class AddDeadlineCommand extends AddCommand {
     private String deadline;
 

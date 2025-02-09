@@ -1,3 +1,5 @@
+package clovis;
+
 import java.util.Scanner;
 
 public class Ui {
@@ -8,7 +10,7 @@ public class Ui {
     }
 
     public void displayWelcome() {
-        System.out.println("Hello! I'm Clovis.\nWhat can I do for you?");
+        System.out.println("Hello! I'm clovis.Clovis.\nWhat can I do for you?");
     }
 
     public String readCommand() {

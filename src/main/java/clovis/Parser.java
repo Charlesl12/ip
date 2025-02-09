@@ -1,3 +1,7 @@
+package clovis;
+
+import clovis.command.*;
+
 public class Parser {
 
     public enum CommandType {
@@ -24,18 +28,20 @@ public class Parser {
                 }
                 return new AddToDoCommand(args);
             case DEADLINE:
-                String[] splitArgsDeadline = args.split("/by ", 2);
-                if (splitArgsDeadline[0].isEmpty() || splitArgsDeadline[1].isEmpty()) {
+                try {
+                    String[] splitArgsDeadline = args.split("/by ", 2);
+                    return new AddDeadlineCommand(splitArgsDeadline[0], splitArgsDeadline[1]);
+                } catch (ArrayIndexOutOfBoundsException e) {
                     throw new ClovisException("A description and a /by date are required for a deadline.");
                 }
-                return new AddDeadlineCommand(splitArgsDeadline[0], splitArgsDeadline[1]);
             case EVENT:
-                String[] splitArgsEvent = args.split("/from | /to ");
-                if (splitArgsEvent[0].isEmpty() || splitArgsEvent[1].isEmpty() || splitArgsEvent[2].isEmpty()) {
+                try {
+                    String[] splitArgsEvent = args.split("/from | /to ");
+                    return new AddEventCommand(splitArgsEvent[0], splitArgsEvent[1], splitArgsEvent[2]);
+                } catch (ArrayIndexOutOfBoundsException e) {
                     throw new ClovisException("A description, a /from date and, a /to date " +
                             "are required for an event is required for an event.");
                 }
-                return new AddEventCommand(splitArgsEvent[0], splitArgsEvent[1], splitArgsEvent[2]);
             case LIST:
                 return new ListCommand();
             case MARK:

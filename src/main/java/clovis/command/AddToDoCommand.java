@@ -1,3 +1,10 @@
+package clovis.command;
+
+import clovis.*;
+import clovis.task.Task;
+import clovis.task.TaskList;
+import clovis.task.ToDo;
+
 public class AddToDoCommand extends AddCommand {
     public AddToDoCommand(String description) {
         super(description);

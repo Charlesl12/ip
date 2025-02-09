@@ -1,3 +1,5 @@
+package clovis.task;
+
 public abstract class Task {
     String description;
     Boolean isDone;
