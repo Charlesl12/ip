@@ -19,8 +19,8 @@ public class Ui {
         System.out.println(message);
     }
 
-    public void displayError(String message) {
-        System.out.println(message);
+    public void displayErrorMessage(String message) {
+        System.err.println(message);
     }
 
     public void displayGoodbye() {

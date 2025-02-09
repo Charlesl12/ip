@@ -4,7 +4,7 @@ public class AddToDoCommand extends AddCommand {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
         Task task = new ToDo(description);
         addTask(tasks, ui, storage, task);
     }

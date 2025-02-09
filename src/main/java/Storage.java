@@ -42,7 +42,7 @@ public class Storage {
                 }
             }
         } catch (IOException e) {
-            throw new ClovisException("Error reading file: " + e.getMessage());
+            throw new ClovisException("Error loading file: " + e.getMessage());
         }
         return tasks;
     }

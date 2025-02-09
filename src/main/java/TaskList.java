@@ -20,11 +20,11 @@ public class TaskList {
     }
 
     public Task deleteTask(int index) {
-        return tasks.remove(index);
+        return tasks.remove(index - 1);
     }
 
     public Task markTask(int index, boolean isDone) {
-        Task task = tasks.get(index);
+        Task task = tasks.get(index - 1);
         if (isDone) {
             task.markAsDone();
         } else {
