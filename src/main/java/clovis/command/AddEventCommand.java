@@ -1,13 +1,16 @@
 package clovis.command;
 
-import clovis.*;
+import clovis.Ui;
+import clovis.Storage;
+import clovis.ClovisException;
+
 import clovis.task.Event;
 import clovis.task.Task;
 import clovis.task.TaskList;
 
 public class AddEventCommand extends AddCommand {
-    private String start;
-    private String end;
+    protected String start;
+    protected String end;
 
     public AddEventCommand(String description, String start, String end) {
         super(description);

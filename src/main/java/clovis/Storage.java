@@ -10,8 +10,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.util.ArrayList;
 import java.io.IOException;
+
+import java.util.ArrayList;
 
 public class Storage {
     private final String filePath;
@@ -30,20 +31,20 @@ public class Storage {
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {
             String line;
             while ((line = br.readLine()) != null) {
-                String[] data = line.split(" \\| ");
-                String taskType = data[0];
-                boolean isDone = data[1].equals("1");
-                String taskDescription = data[2];
+                String[] input = line.split(" \\| ");
+                String taskType = input[0];
+                boolean isDone = input[1].equals("1");
+                String taskDescription = input[2];
 
                 switch (taskType) {
                     case "T":
                         tasks.add(new ToDo(taskDescription, isDone));
                         break;
                     case "D":
-                        tasks.add(new Deadline(taskDescription, isDone, data[3]));
+                        tasks.add(new Deadline(taskDescription, isDone, input[3]));
                         break;
                     case "E":
-                        tasks.add(new Event(taskDescription, isDone, data[3], data[4]));
+                        tasks.add(new Event(taskDescription, isDone, input[3], input[4]));
                     default:
                         System.out.println("Unknown task type: " + taskType);
                 }

@@ -1,11 +1,14 @@
 package clovis.command;
 
-import clovis.*;
+import clovis.Ui;
+import clovis.Storage;
+import clovis.ClovisException;
+
 import clovis.task.Task;
 import clovis.task.TaskList;
 
 public class DeleteCommand extends Command {
-    private int index;
+    protected int index;
 
     public DeleteCommand(int index) {
         this.index = index;

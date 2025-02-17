@@ -3,7 +3,6 @@ package clovis;
 import clovis.command.*;
 
 public class Parser {
-
     public enum CommandType {
         TODO, DEADLINE, EVENT, LIST, DELETE, MARK, UNMARK, BYE, UNKNOWN;
 
