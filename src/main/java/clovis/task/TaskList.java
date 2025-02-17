@@ -17,6 +17,10 @@ public class TaskList {
         return tasks;
     }
 
+    public Task getTask(int index) {
+        return tasks.get(index - 1);
+    }
+
     public void addTask(Task task) {
         tasks.add(task);
     }
