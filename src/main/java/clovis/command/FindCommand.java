@@ -8,19 +8,36 @@ import clovis.Ui;
 import clovis.task.Task;
 import clovis.task.TaskList;
 
+/**
+ * The {@code FindCommand} class handles searching for tasks that contains a specific keyword.
+ */
 public class FindCommand extends Command {
-    protected String description;
+    protected String keyword;
 
-    public FindCommand(String description) {
-        this.description = description;
+    /**
+     * Constructs a {@code FindCommand} instance with the specified keyword.
+     *
+     * @param keyword the keyword used to search for matching tasks.
+     */
+    public FindCommand(String keyword) {
+        this.keyword = keyword;
     }
 
+    /**
+     * Executes the command by searching for tasks that contains the specified keyword
+     *     and lists all the tasks that contains the specified keyword.
+     *
+     * @param tasks the task list to be searched.
+     * @param ui the UI for displaying messages.
+     * @param storage the storage handler for storing and retrieving of tasks.
+     * @throws ClovisException never thrown in this implementation.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
-        ArrayList<Task> matchingTasks = tasks.findTask(description);
+        ArrayList<Task> matchingTasks = tasks.findTask(keyword);
 
         if (matchingTasks.isEmpty()) {
-            ui.displayMessage("No tasks matching " + description);
+            ui.displayMessage("No tasks matching " + keyword);
         } else {
             ui.displayMessage("Here are the matching task/task in your list:");
             for (int i = 0; i < matchingTasks.size(); i++) {
