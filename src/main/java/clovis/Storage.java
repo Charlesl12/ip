@@ -1,18 +1,17 @@
 package clovis;
 
-import clovis.task.Deadline;
-import clovis.task.Event;
-import clovis.task.Task;
-import clovis.task.ToDo;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.util.ArrayList;
+
+import clovis.task.Deadline;
+import clovis.task.Event;
+import clovis.task.Task;
+import clovis.task.ToDo;
 
 /**
  * The {@code Storage} class handles the saving of tasks to a file and retrieval of tasks from a file.
@@ -25,7 +24,7 @@ public class Storage {
      *
      * @param filePath the path to the file.
      */
-    public Storage (String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -38,7 +37,7 @@ public class Storage {
     public ArrayList<Task> loadTasks() throws ClovisException {
         ArrayList<Task> tasks = new ArrayList<>();
         File file = new File(filePath);
-        if(!file.exists()) {
+        if (!file.exists()) {
             file.getParentFile().mkdirs();
             return tasks;
         }
@@ -52,16 +51,17 @@ public class Storage {
                 String taskDescription = input[2];
 
                 switch (taskType) {
-                    case "T":
-                        tasks.add(new ToDo(taskDescription, isDone));
-                        break;
-                    case "D":
-                        tasks.add(new Deadline(taskDescription, isDone, input[3]));
-                        break;
-                    case "E":
-                        tasks.add(new Event(taskDescription, isDone, input[3], input[4]));
-                    default:
-                        System.out.println("Unknown task type: " + taskType);
+                case "T":
+                    tasks.add(new ToDo(taskDescription, isDone));
+                    break;
+                case "D":
+                    tasks.add(new Deadline(taskDescription, isDone, input[3]));
+                    break;
+                case "E":
+                    tasks.add(new Event(taskDescription, isDone, input[3], input[4]));
+                    break;
+                default:
+                    System.out.println("Unknown task type: " + taskType);
                 }
             }
         } catch (IOException e) {

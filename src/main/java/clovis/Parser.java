@@ -1,6 +1,15 @@
 package clovis;
 
-import clovis.command.*;
+import clovis.command.AddDeadlineCommand;
+import clovis.command.AddEventCommand;
+import clovis.command.AddToDoCommand;
+import clovis.command.Command;
+import clovis.command.DeleteCommand;
+import clovis.command.ExitCommand;
+import clovis.command.FindCommand;
+import clovis.command.ListCommand;
+import clovis.command.MarkCommand;
+import clovis.command.UnmarkCommand;
 
 /**
  * The {@code Parser} class is responsible for interpreting user input and returning the corresponding commands.
@@ -40,43 +49,43 @@ public class Parser {
         String args = splitInput.length > 1 ? splitInput[1] : "";
 
         switch (commandType) {
-            case FIND:
-                if (args.isEmpty()) {
-                    throw new ClovisException("Please state what you would like to find.");
-                }
-                return new FindCommand(args);
-            case TODO:
-                if (args.isEmpty()) {
-                    throw new ClovisException("A description is required for a todo.");
-                }
-                return new AddToDoCommand(args);
-            case DEADLINE:
-                try {
-                    String[] splitArgsDeadline = args.split("/by ", 2);
-                    return new AddDeadlineCommand(splitArgsDeadline[0], splitArgsDeadline[1]);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new ClovisException("A description and a /by date are required for a deadline.");
-                }
-            case EVENT:
-                try {
-                    String[] splitArgsEvent = args.split("/from | /to ");
-                    return new AddEventCommand(splitArgsEvent[0], splitArgsEvent[1], splitArgsEvent[2]);
-                } catch (ArrayIndexOutOfBoundsException e) {
-                    throw new ClovisException("A description, a /from date and, a /to date " +
-                            "are required for an event is required for an event.");
-                }
-            case LIST:
-                return new ListCommand();
-            case MARK:
-                return new MarkCommand(Integer.parseInt(args));
-            case UNMARK:
-                return new UnmarkCommand(Integer.parseInt(args));
-            case DELETE:
-                return new DeleteCommand(Integer.parseInt(args));
-            case BYE:
-                return new ExitCommand();
-            default:
-                throw new ClovisException("I have no idea what that means...");
+        case FIND:
+            if (args.isEmpty()) {
+                throw new ClovisException("Please state what you would like to find.");
+            }
+            return new FindCommand(args);
+        case TODO:
+            if (args.isEmpty()) {
+                throw new ClovisException("A description is required for a todo.");
+            }
+            return new AddToDoCommand(args);
+        case DEADLINE:
+            try {
+                String[] splitArgsDeadline = args.split("/by ", 2);
+                return new AddDeadlineCommand(splitArgsDeadline[0], splitArgsDeadline[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new ClovisException("A description and a /by date are required for a deadline.");
+            }
+        case EVENT:
+            try {
+                String[] splitArgsEvent = args.split("/from | /to ");
+                return new AddEventCommand(splitArgsEvent[0], splitArgsEvent[1], splitArgsEvent[2]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new ClovisException("A description, a /from date and, a /to date "
+                        + "are required for an event is required for an event.");
+            }
+        case LIST:
+            return new ListCommand();
+        case MARK:
+            return new MarkCommand(Integer.parseInt(args));
+        case UNMARK:
+            return new UnmarkCommand(Integer.parseInt(args));
+        case DELETE:
+            return new DeleteCommand(Integer.parseInt(args));
+        case BYE:
+            return new ExitCommand();
+        default:
+            throw new ClovisException("I have no idea what that means...");
         }
     }
 }

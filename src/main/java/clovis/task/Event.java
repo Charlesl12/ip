@@ -1,20 +1,19 @@
 package clovis.task;
 
-import clovis.ClovisException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import clovis.ClovisException;
 
 /**
  * The {@code Event} class represents a task with a specified start date and time, and a specified end date and time.
  */
 public class Event extends Task {
-    LocalDateTime start;
-    LocalDateTime end;
-    private final static DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    private final static DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM/d/yyyy HHmm");
-
+    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM/d/yyyy HHmm");
+    private LocalDateTime start;
+    private LocalDateTime end;
     /**
      * Constructs a {@code Event} instance with the specified description, start date and time, and end date and time.
      *
@@ -51,21 +50,23 @@ public class Event extends Task {
     /**
      * Returns the string representation of the task formatted for file storage.
      *
-     * @return the file format of the task with its task type, completion status, description,
-     * start date and time, and end date and time.
+     * @return the file format of the task with its task type, completion status,
+     *     description, start date and time, and end date and time.
      */
     public String toFileFormat() {
-        return "D | " + (isDone ? "1" : "0") + " | " + description + " | " + start.format(OUTPUT_FORMAT) + " | " + end.format(OUTPUT_FORMAT);
+        return "D | " + (isDone ? "1" : "0") + " | " + description + " | "
+                + start.format(OUTPUT_FORMAT) + " | " + end.format(OUTPUT_FORMAT);
     }
 
     /**
      * Returns the string representation of the task.
      *
-     * @return a string containing the task type, status icon, task description,
-     * start date and time, and end date and time.
+     * @return a string containing the task type, status icon,
+     *     task description, start date and time, and end date and time.
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(from: " + start.format(OUTPUT_FORMAT) + " to: " + end.format(OUTPUT_FORMAT) + ")";
+        return "[E]" + super.toString() + "(from: " + start.format(OUTPUT_FORMAT)
+                + " to: " + end.format(OUTPUT_FORMAT) + ")";
     }
 }

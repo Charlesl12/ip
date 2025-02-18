@@ -1,13 +1,12 @@
 package clovis.command;
 
+import java.util.ArrayList;
+
 import clovis.ClovisException;
 import clovis.Storage;
 import clovis.Ui;
-
 import clovis.task.Task;
 import clovis.task.TaskList;
-
-import java.util.ArrayList;
 
 public class FindCommand extends Command {
     protected String description;

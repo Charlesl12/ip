@@ -1,18 +1,18 @@
 package clovis.task;
 
-import clovis.ClovisException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import clovis.ClovisException;
 
 /**
  * The {@code Deadline} class represents a task with a specified deadline.
  */
 public class Deadline extends Task {
-    LocalDateTime deadline;
-    private final static DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    private final static DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM/d/yyyy HHmm");
+    private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
+    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM/d/yyyy HHmm");
+    private LocalDateTime deadline;
 
     /**
      * Constructs a new {@code Deadline} instance with the specified description and deadline.

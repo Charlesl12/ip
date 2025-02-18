@@ -4,8 +4,8 @@ package clovis.task;
  * The {@code Task} class represents a generic task with a description and completion status.
  */
 public abstract class Task {
-    String description;
-    Boolean isDone;
+    protected String description;
+    protected Boolean isDone;
 
     /**
      * Constructs a new {@code Task} instance with a specified description and set it as uncompleted.
