@@ -10,7 +10,7 @@ public class Parser {
      * Enum representing the different types of commands that can be parsed.
      */
     public enum CommandType {
-        TODO, DEADLINE, EVENT, LIST, DELETE, MARK, UNMARK, BYE, UNKNOWN;
+        FIND, TODO, DEADLINE, EVENT, LIST, DELETE, MARK, UNMARK, BYE, UNKNOWN;
 
         /**
          * Converts a string into its corresponding {@code CommandType}.
@@ -40,6 +40,11 @@ public class Parser {
         String args = splitInput.length > 1 ? splitInput[1] : "";
 
         switch (commandType) {
+            case FIND:
+                if (args.isEmpty()) {
+                    throw new ClovisException("Please state what you would like to find.");
+                }
+                return new FindCommand(args);
             case TODO:
                 if (args.isEmpty()) {
                     throw new ClovisException("A description is required for a todo.");
