@@ -5,7 +5,7 @@ import clovis.command.*;
 public class Parser {
 
     public enum CommandType {
-        TODO, DEADLINE, EVENT, LIST, DELETE, MARK, UNMARK, BYE, UNKNOWN;
+        FIND, TODO, DEADLINE, EVENT, LIST, DELETE, MARK, UNMARK, BYE, UNKNOWN;
 
         public static CommandType fromString(String str) {
             try {
@@ -22,6 +22,11 @@ public class Parser {
         String args = splitInput.length > 1 ? splitInput[1] : "";
 
         switch (commandType) {
+            case FIND:
+                if (args.isEmpty()) {
+                    throw new ClovisException("Please state what you would like to find.");
+                }
+                return new FindCommand(args);
             case TODO:
                 if (args.isEmpty()) {
                     throw new ClovisException("A description is required for a todo.");
