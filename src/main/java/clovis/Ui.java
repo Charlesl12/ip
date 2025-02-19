@@ -17,10 +17,11 @@ public class Ui {
 
     /**
      * Displays a welcome message to the user.
+     *
+     * @return a String containing the welcome message.
      */
-    public void displayWelcome() {
-        System.out.println("Hello! I'm clovis.Clovis.\n"
-                + "What can I do for you?");
+    public static String displayWelcome() {
+        return "Hello I'm Clovis.\nWhat can I do for you?";
     }
 
     /**
@@ -52,8 +53,10 @@ public class Ui {
 
     /**
      * Displays a goodbye message to the user.
+     *
+     * @return a String containing the goodbye message.
      */
-    public void displayGoodbye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String displayGoodbye() {
+        return "Bye. Hope to see you again soon!";
     }
 }

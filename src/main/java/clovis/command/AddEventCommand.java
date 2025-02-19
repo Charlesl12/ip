@@ -31,6 +31,7 @@ public class AddEventCommand extends AddCommand {
      * @param tasks the task list to be manipulated.
      * @param ui the UI for displaying messages.
      * @param storage the storage handler for storing and retrieving of tasks.
+     * @return Clovis's response as a String, confirming the addition of the {@code Event} task.
      * @throws ClovisException if an error occurs while saving the tasks.
      */
     @Override

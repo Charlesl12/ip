@@ -30,6 +30,7 @@ public class FindCommand extends Command {
      * @param tasks the task list to be searched.
      * @param ui the UI for displaying messages.
      * @param storage the storage handler for storing and retrieving of tasks.
+     * @return Clovis's response as a String, finding all the tasks in the task list that matches the specified keyword.
      * @throws ClovisException never thrown in this implementation.
      */
     @Override
@@ -41,7 +42,7 @@ public class FindCommand extends Command {
             StringBuilder sb = new StringBuilder("Here are the matching task/task in your list:\n");
             ui.displayMessage("Here are the matching task/task in your list:");
             for (int i = 0; i < matchingTasks.size(); i++) {
-                sb.append((i+1)).append(". ").append(matchingTasks.get(i)).append("\n");
+                sb.append((i + 1)).append(". ").append(matchingTasks.get(i)).append("\n");
             }
             return sb.toString();
         }

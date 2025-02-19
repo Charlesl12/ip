@@ -49,10 +49,24 @@ public class DialogBox extends HBox {
         dialog.getStyleClass().add("reply-label");
     }
 
+    /**
+     * Constructs a {@code DialogBox} for displaying the user's input and the user's image.
+     *
+     * @param text the text of the user's input.
+     * @param img the image of the user.
+     * @return the GUI of the user's input and the user's image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Constructs a {@code DialogBox} for displaying the Clovis' response and the Clovis' image.
+     *
+     * @param text the text of the Clovis' response.
+     * @param img the image of the Clovis.
+     * @return the GUI of the Clovis's response and Clovis' image.
+     */
     public static DialogBox getClovisDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();

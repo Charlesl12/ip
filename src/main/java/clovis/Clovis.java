@@ -4,18 +4,17 @@ import clovis.command.Command;
 import clovis.task.TaskList;
 
 /**
- * The {@code Clovis} class is the main entry point of the application,
- * responsible for initializing components and running the chatbot.
+ * The {@code Clovis} class is responsible for initializing components and running the chatbot.
  */
 public class Clovis {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    protected Storage storage;
+    protected TaskList tasks;
+    protected Ui ui;
 
     /**
      * Constructs a {@code Clovis} instance with the specified file path for storage.
      *
-     * @param filePath the path to the file where the tasks are stored.
+     * @param filePath the path to the file where the saved list of tasks are stored.
      */
     public Clovis(String filePath) {
         ui = new Ui();

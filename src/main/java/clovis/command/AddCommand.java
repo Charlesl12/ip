@@ -30,12 +30,12 @@ public abstract class AddCommand extends Command {
      * @param ui the UI for displaying messages.
      * @param storage the storage handler for saving tasks.
      * @param task the task to be added.
+     * @return Clovis's response as a String, confirming the addition of the task.
      * @throws ClovisException if an error occurs while saving the updated tasks.
      */
     public String addTask(TaskList tasks, Ui ui, Storage storage, Task task) throws ClovisException {
         tasks.addTask(task);
         storage.saveTasks(tasks.getTasks());
-
         return "Got it. I've added this task:\n" + task
                 + "\nNow you have " + tasks.size() + " tasks in the list.";
 

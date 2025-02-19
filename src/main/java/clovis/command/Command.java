@@ -15,6 +15,7 @@ public abstract class Command {
      * @param tasks the task list to be manipulated.
      * @param ui the UI for displaying messages.
      * @param storage the storage handler for storing and retrieving of tasks.
+     * @return Clovis's response as a String, corresponding to the command execution and its outcome.
      * @throws ClovisException if an error occurs during execution.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException;

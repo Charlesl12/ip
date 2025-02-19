@@ -1,6 +1,7 @@
 package clovis.gui;
 
 import clovis.Clovis;
+import clovis.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -27,18 +28,22 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/spongebob.png"));
     private Image clovisImage = new Image(this.getClass().getResourceAsStream("/images/patrick.png"));
 
+    /**
+     * Initializes the GUI and display the welcome message.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().add(DialogBox.getClovisDialog(Ui.displayWelcome(), clovisImage));
     }
 
-    /** Injects the Duke instance */
+    /** Injects the Clovis instance */
     public void setClovis(Clovis clovis) {
         this.clovis = clovis;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, the user input and the other containing Clovis's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML

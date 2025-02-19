@@ -28,13 +28,13 @@ public class MarkCommand extends Command {
      * @param tasks the task list to be manipulated.
      * @param ui the UI for displaying messages.
      * @param storage the storage handler for storing and retrieving of tasks.
+     * @return Clovis's response as a String, confirming that the task have been marked as completed.
      * @throws ClovisException If an error occurs while saving the updated task list.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
         Task task = tasks.markTask(index, true);
         storage.saveTasks(tasks.getTasks());
-
         return "Nice! I've marked this task as done:\n" + task;
     }
 }
