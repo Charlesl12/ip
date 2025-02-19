@@ -32,8 +32,8 @@ public class AddDeadlineCommand extends AddCommand {
      * @throws ClovisException if an error occurs while saving the tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
         Task task = new Deadline(description, deadline);
-        addTask(tasks, ui, storage, task);
+        return addTask(tasks, ui, storage, task);
     }
 }

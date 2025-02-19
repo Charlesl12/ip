@@ -29,27 +29,17 @@ public class Clovis {
     }
 
     /**
-     * Runs the main program and processes the user inputs in a loop until an exit command is given.
+     * Processes user input and returns Clovis's response.
+     *
+     * @param input the user's input command.
+     * @return Clovis's response as a String.
      */
-    public void run() {
-        ui.displayWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String command = ui.readCommand();
-                Command c = Parser.parse(command);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (ClovisException e) {
-                ui.displayErrorMessage(e.getMessage());
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+        } catch (ClovisException e) {
+            return e.getMessage();
         }
-    }
-
-    /**
-     * The main entry point of the program, initializing and running the chatbot.
-     */
-    public static void main(String[] args) {
-        new Clovis("data/tasks.txt").run();
     }
 }

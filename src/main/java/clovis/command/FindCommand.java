@@ -33,16 +33,17 @@ public class FindCommand extends Command {
      * @throws ClovisException never thrown in this implementation.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
         ArrayList<Task> matchingTasks = tasks.findTask(keyword);
-
         if (matchingTasks.isEmpty()) {
-            ui.displayMessage("No tasks matching " + keyword);
+            return "No tasks matching " + keyword;
         } else {
+            StringBuilder sb = new StringBuilder("Here are the matching task/task in your list:\n");
             ui.displayMessage("Here are the matching task/task in your list:");
             for (int i = 0; i < matchingTasks.size(); i++) {
-                System.out.println((i + 1) + ". " + matchingTasks.get(i));
+                sb.append((i+1)).append(". ").append(matchingTasks.get(i)).append("\n");
             }
+            return sb.toString();
         }
     }
 }

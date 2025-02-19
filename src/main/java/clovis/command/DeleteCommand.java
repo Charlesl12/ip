@@ -30,10 +30,11 @@ public class DeleteCommand extends Command {
      * @throws ClovisException if an error occurs while saving the updated tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
         Task task = tasks.deleteTask(index);
-        ui.displayMessage("Noted. I've removed this task:\n" + task);
-        ui.displayMessage("Now you have " + tasks.size() + " tasks in the list.");
         storage.saveTasks(tasks.getTasks());
+
+        return "Noted. I've removed this task:\n" + task
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 }

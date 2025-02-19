@@ -21,7 +21,7 @@ public abstract class AddCommand extends Command {
         this.description = description;
     }
 
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException;
 
     /**
      * Adds a task to the task list, display relevant messages, and saves the updated list to the storage.
@@ -32,10 +32,12 @@ public abstract class AddCommand extends Command {
      * @param task the task to be added.
      * @throws ClovisException if an error occurs while saving the updated tasks.
      */
-    public void addTask(TaskList tasks, Ui ui, Storage storage, Task task) throws ClovisException {
+    public String addTask(TaskList tasks, Ui ui, Storage storage, Task task) throws ClovisException {
         tasks.addTask(task);
-        ui.displayMessage("Got it. I've added this task:\n" + task);
-        ui.displayMessage("Now you have " + tasks.size() + " tasks in the list.");
         storage.saveTasks(tasks.getTasks());
+
+        return "Got it. I've added this task:\n" + task
+                + "\nNow you have " + tasks.size() + " tasks in the list.";
+
     }
 }

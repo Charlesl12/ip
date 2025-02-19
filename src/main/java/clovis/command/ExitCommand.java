@@ -18,8 +18,8 @@ public class ExitCommand extends Command {
      * @throws ClovisException never thrown in this implementation.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
-        ui.displayGoodbye();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**

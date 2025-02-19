@@ -17,7 +17,7 @@ public abstract class Command {
      * @param storage the storage handler for storing and retrieving of tasks.
      * @throws ClovisException if an error occurs during execution.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException;
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException;
 
     /**
      * Determines if this command should exit the program.

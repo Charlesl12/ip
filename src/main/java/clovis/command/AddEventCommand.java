@@ -34,8 +34,8 @@ public class AddEventCommand extends AddCommand {
      * @throws ClovisException if an error occurs while saving the tasks.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
         Task task = new Event(description, start, end);
-        addTask(tasks, ui, storage, task);
+        return addTask(tasks, ui, storage, task);
     }
 }
