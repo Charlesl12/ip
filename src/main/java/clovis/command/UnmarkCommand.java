@@ -31,9 +31,9 @@ public class UnmarkCommand extends Command {
      * @throws ClovisException If an error occurs while saving the updated task list.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
         Task task = tasks.markTask(index, false);
-        ui.displayMessage("OK, I've marked this task as not done yet:\n" + task);
         storage.saveTasks(tasks.getTasks());
+        return "OK, I've marked this task as not done yet:\n" + task;
     }
 }

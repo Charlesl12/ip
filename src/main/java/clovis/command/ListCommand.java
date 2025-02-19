@@ -18,7 +18,15 @@ public class ListCommand extends Command {
      * @throws ClovisException never thrown in this implementation.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
-        tasks.listTasks();
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
+        if (tasks.isEmpty()) {
+            return "List is empty";
+        }
+
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            sb.append((i + 1)).append(". ").append(tasks.getTask(i + 1)).append("\n");
+        }
+        return sb.toString();
     }
 }
