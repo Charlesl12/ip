@@ -35,6 +35,8 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
+        assert tasks != null : "TaskList should not be null";
+
         ArrayList<Task> matchingTasks = tasks.findTask(keyword);
         if (matchingTasks.isEmpty()) {
             return "No tasks matching " + keyword;

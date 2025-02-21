@@ -34,9 +34,12 @@ public class Clovis {
      * @return Clovis's response as a String.
      */
     public String getResponse(String input) {
+        assert input != null : "User input should not be null!";
         try {
             Command c = Parser.parse(input);
-            return c.execute(tasks, ui, storage);
+            String response = c.execute(tasks, ui, storage);
+            assert response != null && !response.isEmpty() : "Duke response should not be null or empty!";
+            return response;
         } catch (ClovisException e) {
             return e.getMessage();
         }

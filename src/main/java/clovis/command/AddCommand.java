@@ -34,7 +34,12 @@ public abstract class AddCommand extends Command {
      * @throws ClovisException if an error occurs while saving the updated tasks.
      */
     public String addTask(TaskList tasks, Ui ui, Storage storage, Task task) throws ClovisException {
+        assert task != null : "Task should not be null";
+
         tasks.addTask(task);
+
+        assert !tasks.isEmpty() : "Tasks should not be empty after adding";
+
         storage.saveTasks(tasks.getTasks());
         return "Got it. I've added this task:\n" + task
                 + "\nNow you have " + tasks.size() + " tasks in the list.";

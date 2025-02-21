@@ -33,6 +33,9 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
+        assert tasks != null : "TaskList should not be null when unmarking!";
+        assert index >= 1 && index <= tasks.size() : "Task index is out of bounds!";
+
         Task task = tasks.markTask(index, false);
         storage.saveTasks(tasks.getTasks());
         return "OK, I've marked this task as not done yet:\n" + task;

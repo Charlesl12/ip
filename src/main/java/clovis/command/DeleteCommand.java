@@ -32,7 +32,13 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
+        assert tasks != null : "TaskList should not be null when deleting!";
+        assert index >= 1 && index <= tasks.size() : "Task index is out of bounds!";
+
         Task task = tasks.deleteTask(index);
+        
+        assert task != null : "Deleted task should not be null!";
+
         storage.saveTasks(tasks.getTasks());
         return "Noted. I've removed this task:\n" + task
                 + "\nNow you have " + tasks.size() + " tasks in the list.";
