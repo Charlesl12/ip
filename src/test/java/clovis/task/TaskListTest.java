@@ -70,7 +70,7 @@ public class TaskListTest {
         tasks.addTask(todo2);
         ArrayList<Task> matchingTasks = tasks.findTask("sLeep");
 
-        assertEquals(1, matchingTasks.size());
+        assertEquals(0, matchingTasks.size());
         assertTrue(matchingTasks.isEmpty());
     }
 }
