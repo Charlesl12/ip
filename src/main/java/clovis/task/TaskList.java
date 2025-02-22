@@ -21,7 +21,6 @@ public class TaskList {
      * @param tasks the lists of tasks to initialize the {@code TaskList} with.
      */
     public TaskList(ArrayList<Task> tasks) {
-        assert tasks != null : "TaskList should not be initialized with a null task list!";
         this.tasks = tasks;
     }
 
@@ -41,7 +40,6 @@ public class TaskList {
      * @return the task at the specified index.
      */
     public Task getTask(int index) {
-        assert index >= 1 && index <= tasks.size() : "Task index out of bounds!";
         return tasks.get(index - 1);
     }
 
@@ -51,9 +49,7 @@ public class TaskList {
      * @param task the task to be added.
      */
     public void addTask(Task task) {
-        assert task != null : "Task to be added should not be null!";
         tasks.add(task);
-        assert tasks.contains(task) : "Task was not successfully added!";
     }
 
     /**
@@ -63,7 +59,6 @@ public class TaskList {
      * @return the task at the specified index.
      */
     public Task deleteTask(int index) {
-        assert index >= 1 && index <= tasks.size() : "Task index out of bounds!";
         return tasks.remove(index - 1);
     }
 
@@ -75,7 +70,6 @@ public class TaskList {
      * @return the task at the specified index with its completion status updated.
      */
     public Task markTask(int index, boolean isDone) {
-        assert index >= 1 && index <= tasks.size() : "Task index out of bounds!";
         Task task = tasks.get(index - 1);
         if (isDone) {
             task.markAsDone();
