@@ -33,8 +33,15 @@ public class UnmarkCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
+        validateIndex(index, tasks);
         Task task = tasks.markTask(index, false);
         storage.saveTasks(tasks.getTasks());
-        return "OK, I've marked this task as not done yet:\n" + task;
+        return ui.displayUnmarkMessage(task);
+    }
+
+    public void validateIndex(int index, TaskList tasks) throws ClovisException {
+        if (index < 1 || index > tasks.size()) {
+            throw new ClovisException("Invalid task index!");
+        }
     }
 }

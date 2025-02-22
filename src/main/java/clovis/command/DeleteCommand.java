@@ -32,9 +32,15 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws ClovisException {
+        validateIndex(index, tasks);
         Task task = tasks.deleteTask(index);
         storage.saveTasks(tasks.getTasks());
-        return "Noted. I've removed this task:\n" + task
-                + "\nNow you have " + tasks.size() + " tasks in the list.";
+        return ui.displayDeleteMessage(task, tasks);
+    }
+
+    public void validateIndex(int index, TaskList tasks) throws ClovisException {
+        if (index < 1 || index > tasks.size()) {
+            throw new ClovisException("Invalid task index!");
+        }
     }
 }

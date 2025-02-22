@@ -98,19 +98,6 @@ public class TaskList {
     }
 
     /**
-     * Displays all the tasks in the list.
-     */
-    public void listTasks() {
-        if (tasks.isEmpty()) {
-            System.out.println("List is empty");
-        } else {
-            for (int i = 0; i < tasks.size(); i++) {
-                System.out.println((i + 1) + ". " + tasks.get(i));
-            }
-        }
-    }
-
-    /**
      * Checks all the tasks in the list to search for tasks that contains the matching keyword.
      *
      * @param keyword the keyword used to search for matching tasks.

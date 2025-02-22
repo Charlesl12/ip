@@ -36,8 +36,6 @@ public abstract class AddCommand extends Command {
     public String addTask(TaskList tasks, Ui ui, Storage storage, Task task) throws ClovisException {
         tasks.addTask(task);
         storage.saveTasks(tasks.getTasks());
-        return "Got it. I've added this task:\n" + task
-                + "\nNow you have " + tasks.size() + " tasks in the list.";
-
+        return ui.displayAddMessage(task, tasks);
     }
 }
