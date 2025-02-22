@@ -59,13 +59,17 @@ public class Storage {
      * @throws ClovisException if an error occurs while writing to the file.
      */
     public void saveTasks(ArrayList<Task> tasks) throws ClovisException {
-        try {
-            BufferedWriter bw = new BufferedWriter(new FileWriter(filePath));
-            for (Task task : tasks) {
-                bw.write(task.toFileFormat());
-                bw.newLine();
-            }
-            bw.close();
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter(filePath))) {
+            tasks.stream()
+                    .map(Task::toFileFormat)
+                    .forEach(line -> {
+                        try {
+                            bw.write(line);
+                            bw.newLine();
+                        } catch (IOException e) {
+                            throw new RuntimeException("Error writing task: " + line, e);
+                        }
+                    });
         } catch (IOException e) {
             throw new ClovisException("Error saving file: " + e.getMessage());
         }
