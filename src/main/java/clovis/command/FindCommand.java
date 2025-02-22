@@ -38,15 +38,6 @@ public class FindCommand extends Command {
         assert tasks != null : "TaskList should not be null";
 
         ArrayList<Task> matchingTasks = tasks.findTask(keyword);
-        if (matchingTasks.isEmpty()) {
-            return "No tasks matching " + keyword;
-        } else {
-            StringBuilder sb = new StringBuilder("Here are the matching task/task in your list:\n");
-            ui.displayMessage("Here are the matching task/task in your list:");
-            for (int i = 0; i < matchingTasks.size(); i++) {
-                sb.append((i + 1)).append(". ").append(matchingTasks.get(i)).append("\n");
-            }
-            return sb.toString();
-        }
+        return ui.listMatchingTasks(matchingTasks, keyword);
     }
 }

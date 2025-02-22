@@ -35,12 +35,18 @@ public class DeleteCommand extends Command {
         assert tasks != null : "TaskList should not be null when deleting!";
         assert index >= 1 && index <= tasks.size() : "Task index is out of bounds!";
 
+        validateIndex(index, tasks);
         Task task = tasks.deleteTask(index);
         
         assert task != null : "Deleted task should not be null!";
 
         storage.saveTasks(tasks.getTasks());
-        return "Noted. I've removed this task:\n" + task
-                + "\nNow you have " + tasks.size() + " tasks in the list.";
+        return ui.displayDeleteMessage(task, tasks);
+    }
+
+    public void validateIndex(int index, TaskList tasks) throws ClovisException {
+        if (index < 1 || index > tasks.size()) {
+            throw new ClovisException("Invalid task index!");
+        }
     }
 }

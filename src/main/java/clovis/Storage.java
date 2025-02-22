@@ -35,33 +35,15 @@ public class Storage {
      * @throws ClovisException if an error occurs while reading the file.
      */
     public ArrayList<Task> loadTasks() throws ClovisException {
+        ensureFileExist();
         ArrayList<Task> tasks = new ArrayList<>();
-        File file = new File(filePath);
-        if (!file.exists()) {
-            file.getParentFile().mkdirs();
-            return tasks;
-        }
 
-        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String line;
             while ((line = br.readLine()) != null) {
-                String[] input = line.split(" \\| ");
-                String taskType = input[0];
-                boolean isDone = input[1].equals("1");
-                String taskDescription = input[2];
-
-                switch (taskType) {
-                case "T":
-                    tasks.add(new ToDo(taskDescription, isDone));
-                    break;
-                case "D":
-                    tasks.add(new Deadline(taskDescription, isDone, input[3]));
-                    break;
-                case "E":
-                    tasks.add(new Event(taskDescription, isDone, input[3], input[4]));
-                    break;
-                default:
-                    System.out.println("Unknown task type: " + taskType);
+                Task task = parseTaskFromFile(line);
+                if (task != null) {
+                    tasks.add(task);
                 }
             }
         } catch (IOException e) {
@@ -86,6 +68,32 @@ public class Storage {
             bw.close();
         } catch (IOException e) {
             throw new ClovisException("Error saving file: " + e.getMessage());
+        }
+    }
+
+    public void ensureFileExist() {
+        File file = new File(filePath);
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+        }
+    }
+
+    public Task parseTaskFromFile(String line) {
+        String[] input = line.split(" \\| ");
+        String taskType = input[0];
+        boolean isDone = input[1].equals("1");
+        String taskDescription = input[2];
+
+        switch (taskType) {
+        case "T":
+            return new ToDo(taskDescription, isDone);
+        case "D":
+            return new Deadline(taskDescription, isDone, input[3]);
+        case "E":
+            return new Event(taskDescription, isDone, input[3], input[4]);
+        default:
+            System.out.println("Unknown task type: " + taskType);
+            return null;
         }
     }
 }

@@ -36,8 +36,15 @@ public class UnmarkCommand extends Command {
         assert tasks != null : "TaskList should not be null when unmarking!";
         assert index >= 1 && index <= tasks.size() : "Task index is out of bounds!";
 
+        validateIndex(index, tasks);
         Task task = tasks.markTask(index, false);
         storage.saveTasks(tasks.getTasks());
-        return "OK, I've marked this task as not done yet:\n" + task;
+        return ui.displayUnmarkMessage(task);
+    }
+
+    public void validateIndex(int index, TaskList tasks) throws ClovisException {
+        if (index < 1 || index > tasks.size()) {
+            throw new ClovisException("Invalid task index!");
+        }
     }
 }

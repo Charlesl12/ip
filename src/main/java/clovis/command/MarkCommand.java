@@ -36,8 +36,15 @@ public class MarkCommand extends Command {
         assert tasks != null : "TaskList should not be null when marking!";
         assert index >= 1 && index <= tasks.size() : "Task index is out of bounds!";
 
+        validateIndex(index, tasks);
         Task task = tasks.markTask(index, true);
         storage.saveTasks(tasks.getTasks());
-        return "Nice! I've marked this task as done:\n" + task;
+        return ui.displayMarkMessage(task);
+    }
+
+    public void validateIndex(int index, TaskList tasks) throws ClovisException {
+        if (index < 1 || index > tasks.size()) {
+            throw new ClovisException("Invalid task index!");
+        }
     }
 }

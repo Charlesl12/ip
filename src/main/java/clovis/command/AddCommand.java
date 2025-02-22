@@ -41,8 +41,6 @@ public abstract class AddCommand extends Command {
         assert !tasks.isEmpty() : "Tasks should not be empty after adding";
 
         storage.saveTasks(tasks.getTasks());
-        return "Got it. I've added this task:\n" + task
-                + "\nNow you have " + tasks.size() + " tasks in the list.";
-
+        return ui.displayAddMessage(task, tasks);
     }
 }
