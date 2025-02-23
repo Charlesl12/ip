@@ -2,8 +2,9 @@ package clovis.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import clovis.ClovisException;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -11,7 +12,7 @@ import java.util.ArrayList;
 public class TaskListTest {
 
     @Test
-    public void testAddTaskAndGetTask() {
+    public void testAddTaskAndGetTask() throws ClovisException {
         TaskList tasks = new TaskList();
         ToDo todo = new ToDo("read book");
         tasks.addTask(todo);
@@ -21,7 +22,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testDeleteTask() {
+    public void testDeleteTask() throws ClovisException {
         TaskList tasks = new TaskList();
         ToDo todo1 = new ToDo("read book");
         ToDo todo2 = new ToDo("return book");
@@ -34,7 +35,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testMarkTask() {
+    public void testMarkTask() throws ClovisException {
         TaskList tasks = new TaskList();
         ToDo todo1 = new ToDo("read book");
         ToDo todo2 = new ToDo("return book");
@@ -49,7 +50,7 @@ public class TaskListTest {
 
 
     @Test
-    public void testFindTask_returnsMatchingTask() {
+    public void testFindTask_returnsMatchingTask() throws ClovisException {
         TaskList tasks = new TaskList();
         ToDo todo1 = new ToDo("read book");
         ToDo todo2 = new ToDo("return book");
@@ -62,7 +63,7 @@ public class TaskListTest {
     }
 
     @Test
-    public void testFindTask_returnsNoMatchingTask() {
+    public void testFindTask_returnsNoMatchingTask() throws ClovisException {
         TaskList tasks = new TaskList();
         ToDo todo1 = new ToDo("read book");
         ToDo todo2 = new ToDo("return book");
@@ -72,5 +73,18 @@ public class TaskListTest {
 
         assertEquals(0, matchingTasks.size());
         assertTrue(matchingTasks.isEmpty());
+    }
+
+    @Test
+    public void addTask_duplicateTask_throwsException() throws ClovisException {
+        TaskList taskList = new TaskList();
+        Task task1 = new ToDo("Read book");
+        Task task2 = new ToDo("Read book");
+
+        taskList.addTask(task1);
+
+        assertThrows(ClovisException.class, () -> {
+            taskList.addTask(task2);
+        });
     }
 }

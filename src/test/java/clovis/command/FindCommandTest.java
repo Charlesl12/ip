@@ -22,7 +22,7 @@ public class FindCommandTest {
     private Storage storage;
 
     @BeforeEach
-    public void setUp() {
+    public void setUp() throws ClovisException {
         taskList = new TaskList(new ArrayList<>());
         ui = new Ui();
         storage = new Storage("data/test_tasks.txt");

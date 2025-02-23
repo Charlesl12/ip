@@ -1,5 +1,7 @@
 package clovis.task;
 
+import clovis.ClovisException;
+
 import java.util.ArrayList;
 
 /**
@@ -44,11 +46,14 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the list.
+     * Adds a task to the list after checking if the specified task is a duplicate.
      *
      * @param task the task to be added.
      */
-    public void addTask(Task task) {
+    public void addTask(Task task) throws ClovisException {
+        if (containsTask(task)) {
+            throw new ClovisException("This task already exists in your list");
+        }
         tasks.add(task);
     }
 
@@ -111,5 +116,20 @@ public class TaskList {
             }
         }
         return matchingTasks;
+    }
+
+    /**
+     * Checks if the specified task  already exists in the task list.
+     *
+     * @param task the task to be checked.
+     * @return {@code True} if the specified task exists in the list,
+     * else {@code False} if it does not exist in the list.
+     */
+    public boolean containsTask(Task task) {
+        for (Task taskInList : tasks) {
+            if (taskInList.description.equalsIgnoreCase(task.description))
+                return true;
+        }
+        return false;
     }
 }
