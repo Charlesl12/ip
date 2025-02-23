@@ -25,8 +25,8 @@ public class MainWindow extends AnchorPane {
 
     private Clovis clovis;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/spongebob.png"));
-    private Image clovisImage = new Image(this.getClass().getResourceAsStream("/images/patrick.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/patrick.png"));
+    private Image clovisImage = new Image(this.getClass().getResourceAsStream("/images/spongebob.png"));
 
     /**
      * Initializes the GUI and display the welcome message.

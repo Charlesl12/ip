@@ -27,6 +27,9 @@ public class Event extends Task {
         try {
             this.start = LocalDateTime.parse(startDateTime, INPUT_FORMAT);
             this.end = LocalDateTime.parse(endDateTime, INPUT_FORMAT);
+            if (start.isBefore(LocalDateTime.now()) || end.isBefore(LocalDateTime.now())) {
+                throw new ClovisException("You can't travel to the past");
+            }
         } catch (DateTimeParseException e) {
             throw new ClovisException("Invalid date and time format! Use: dd/MM/yyyy HHmm (e.g., 22/6/2000 1600)");
         }
