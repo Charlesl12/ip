@@ -42,6 +42,13 @@ public class UnmarkCommand extends Command {
         return ui.displayUnmarkMessage(task);
     }
 
+    /**
+     * Checks if the input index is valid.
+     *
+     * @param index the index to be checked.
+     * @param tasks the task list to get its size.
+     * @throws ClovisException if the index is lower than 1 or higher than the size of the task list.
+     */
     public void validateIndex(int index, TaskList tasks) throws ClovisException {
         if (index < 1 || index > tasks.size()) {
             throw new ClovisException("Invalid task index!");

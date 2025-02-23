@@ -1,20 +1,19 @@
 package clovis.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.util.ArrayList;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-
-import clovis.task.TaskList;
-import clovis.task.ToDo;
+import clovis.ClovisException;
 import clovis.Storage;
 import clovis.Ui;
-import clovis.ClovisException;
-
+import clovis.task.TaskList;
+import clovis.task.ToDo;
 
 public class FindCommandTest {
     private TaskList taskList;

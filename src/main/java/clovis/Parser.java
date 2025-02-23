@@ -47,7 +47,6 @@ public class Parser {
         assert input != null : "User input should not be null!";
         String[] splitInputAssertion = input.trim().split(" ", 2);
         assert splitInputAssertion.length > 0 : "Command parsing failed, input split length should be at least 1.";
-        
         String[] splitInput = input.trim().split(" ", 2);
         CommandType commandType = CommandType.fromString(splitInput[0]);
         String args = splitInput.length > 1 ? splitInput[1] : "";

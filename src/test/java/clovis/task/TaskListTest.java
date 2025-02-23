@@ -1,13 +1,14 @@
 package clovis.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-
-import clovis.ClovisException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
+import clovis.ClovisException;
 
 public class TaskListTest {
 

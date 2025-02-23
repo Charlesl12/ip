@@ -1,8 +1,8 @@
 package clovis.task;
 
-import clovis.ClovisException;
-
 import java.util.ArrayList;
+
+import clovis.ClovisException;
 
 /**
  * The {@code TaskList} class represents a collection of tasks.
@@ -129,12 +129,13 @@ public class TaskList {
      *
      * @param other the task to check for duplicates.
      * @return {@code True} if the specified task exists in the list,
-     * else {@code False} if it does not exist in the list.
+     *         else {@code False} if it does not exist in the list.
      */
-    public boolean containsTask (Task other) {
+    public boolean containsTask(Task other) {
         for (Task task : tasks) {
-            if (task.description.equalsIgnoreCase(other.description))
+            if (task.description.equalsIgnoreCase(other.description)) {
                 return true;
+            }
         }
         return false;
     }
@@ -145,7 +146,7 @@ public class TaskList {
      * @param other The task to check for a conflict with.
      * @return {@code True} if the specified task clashes with other task, {@code False} if there are no clashes.
      */
-    public boolean hasScheduleConflict (Task other) {
+    public boolean hasScheduleConflict(Task other) {
         for (Task task : tasks) {
             if (other.conflictsWith(task)) {
                 return true;

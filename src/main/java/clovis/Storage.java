@@ -75,6 +75,9 @@ public class Storage {
         }
     }
 
+    /**
+     * Ensures a file exist in the specified path, else create one.
+     */
     public void ensureFileExist() {
         File file = new File(filePath);
         if (!file.exists()) {
@@ -82,6 +85,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Parses a line from the storage file and converts it into a corresponding {@code Task} object.
+     *
+     * @param line the line from the file representing a task.
+     * @return the corresponding {@code Task} object, or {@code null} if the task type is unknown.
+     */
     public Task parseTaskFromFile(String line) {
         String[] input = line.split(" \\| ");
         String taskType = input[0];

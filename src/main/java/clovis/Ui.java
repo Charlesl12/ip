@@ -1,10 +1,10 @@
 package clovis;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+
 import clovis.task.Task;
 import clovis.task.TaskList;
-
-import java.util.Scanner;
-import java.util.ArrayList;
 
 /**
  * The {@code Ui} class handles user interaction by displaying messages and reading user input.
@@ -71,7 +71,7 @@ public class Ui {
      * @param tasks the task list to which the task was added.
      * @return a formatted String confirming the addition of the task and the updated list size.
      */
-    public String displayAddMessage (Task task, TaskList tasks) {
+    public String displayAddMessage(Task task, TaskList tasks) {
         return "Got it. I've added this task:\n" + task
                 + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
@@ -88,7 +88,8 @@ public class Ui {
                 + "\nNow you have " + tasks.size() + " tasks in the list.";
     }
 
-    /** Displays the list of tasks that contain the specified keyword.
+    /**
+     * Displays the list of tasks that contain the specified keyword.
      *
      * @param matchingTasks the list of tasks that match the specified keyword.
      * @param keyword the keyword used for searching tasks.
