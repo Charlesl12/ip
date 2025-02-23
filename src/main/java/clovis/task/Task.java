@@ -51,6 +51,19 @@ public abstract class Task {
         isDone = false;
     }
 
+
+    /**
+     * Checks whether this task conflicts with another task. By default, tasks do not have scheduling conflicts.
+     * Subclasses such as {@code Deadline} and {@code Event} will override this method to implement conflict
+     * detection based on time.
+     *
+     * @param task the task to check for a conflict with.
+     * @return {@code false} since generic tasks do not have conflicts.
+     */
+    public boolean conflictsWith(Task task) {
+        return false;
+    }
+
     /**
      * Returns the string representation of the task formatted for file storage.
      *

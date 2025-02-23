@@ -11,7 +11,7 @@ import clovis.ClovisException;
  */
 public class Deadline extends Task {
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM/d/yyyy HHmm");
+    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("d MMM yyyy HHmm");
     private LocalDateTime deadline;
 
     /**
@@ -41,6 +41,22 @@ public class Deadline extends Task {
     public Deadline(String description, boolean isDone, String dateTime) {
         super(description, isDone);
         this.deadline = LocalDateTime.parse(dateTime, OUTPUT_FORMAT);
+    }
+
+    /**
+     * Checks whether this deadline conflicts with another deadline task.
+     *
+     * @param other the task to check for a scheduling conflict.
+     * @return {@code true} if the other task is a {@code Deadline} with
+     *         the same due date, {@code false} otherwise.
+     */
+    @Override
+    public boolean conflictsWith(Task other) {
+        if (other instanceof Deadline) {
+            Deadline otherDeadline = (Deadline) other;
+            return this.deadline.equals(otherDeadline.deadline);
+        }
+        return false;
     }
 
     /**

@@ -46,7 +46,8 @@ public class TaskList {
     }
 
     /**
-     * Adds a task to the list after checking if the specified task is a duplicate.
+     * Adds a task to the list after checking if the specified task is a duplicate
+     * and if it clashes with any other tasks in the list.
      *
      * @param task the task to be added.
      */
@@ -54,6 +55,11 @@ public class TaskList {
         if (containsTask(task)) {
             throw new ClovisException("This task already exists in your list");
         }
+
+        if (hasScheduleConflict(task)) {
+            throw new ClovisException("This task timeline overlaps with another task.");
+        }
+
         tasks.add(task);
     }
 
@@ -119,16 +125,31 @@ public class TaskList {
     }
 
     /**
-     * Checks if the specified task  already exists in the task list.
+     * Checks if the specified task already exists in the task list.
      *
-     * @param task the task to be checked.
+     * @param other the task to check for duplicates.
      * @return {@code True} if the specified task exists in the list,
      * else {@code False} if it does not exist in the list.
      */
-    public boolean containsTask(Task task) {
-        for (Task taskInList : tasks) {
-            if (taskInList.description.equalsIgnoreCase(task.description))
+    public boolean containsTask (Task other) {
+        for (Task task : tasks) {
+            if (task.description.equalsIgnoreCase(other.description))
                 return true;
+        }
+        return false;
+    }
+
+    /**
+     * Checks if the specified task clashes with any other tasks in the list.
+     *
+     * @param other The task to check for a conflict with.
+     * @return {@code True} if the specified task clashes with other task, {@code False} if there are no clashes.
+     */
+    public boolean hasScheduleConflict (Task other) {
+        for (Task task : tasks) {
+            if (other.conflictsWith(task)) {
+                return true;
+            }
         }
         return false;
     }

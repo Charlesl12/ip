@@ -1,3 +1,2 @@
 T | 1 | read book
-D | 0 | return book  | Jun/22/2000 0000
-T | 0 | read more books
+D | 0 | return book  | 22 Jun 2000 1200

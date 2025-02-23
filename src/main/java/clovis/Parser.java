@@ -48,7 +48,7 @@ public class Parser {
         String[] splitInputAssertion = input.trim().split(" ", 2);
         assert splitInputAssertion.length > 0 : "Command parsing failed, input split length should be at least 1.";
         
-        String[] splitInput = input.split(" ", 2);
+        String[] splitInput = input.trim().split(" ", 2);
         CommandType commandType = CommandType.fromString(splitInput[0]);
         String args = splitInput.length > 1 ? splitInput[1] : "";
 
@@ -66,6 +66,9 @@ public class Parser {
         case DEADLINE:
             try {
                 String[] splitArgsDeadline = args.split("/by ", 2);
+                if (splitArgsDeadline[0].isEmpty()) {
+                    throw new ClovisException("A description is required for an event.");
+                }
                 return new AddDeadlineCommand(splitArgsDeadline[0], splitArgsDeadline[1]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new ClovisException("A description and a /by date are required for a deadline.");
@@ -73,6 +76,9 @@ public class Parser {
         case EVENT:
             try {
                 String[] splitArgsEvent = args.split("/from | /to ");
+                if (splitArgsEvent[0].isEmpty()) {
+                    throw new ClovisException("A description is required for an event.");
+                }
                 return new AddEventCommand(splitArgsEvent[0], splitArgsEvent[1], splitArgsEvent[2]);
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new ClovisException("A description, a /from date and, a /to date "

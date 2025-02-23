@@ -11,7 +11,7 @@ import clovis.ClovisException;
  */
 public class Event extends Task {
     private static final DateTimeFormatter INPUT_FORMAT = DateTimeFormatter.ofPattern("d/M/yyyy HHmm");
-    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("MMM/d/yyyy HHmm");
+    private static final DateTimeFormatter OUTPUT_FORMAT = DateTimeFormatter.ofPattern("d MMM yyyy HHmm");
     private LocalDateTime start;
     private LocalDateTime end;
     /**
@@ -45,6 +45,22 @@ public class Event extends Task {
         super(description, isDone);
         this.start = LocalDateTime.parse(startDateTime, OUTPUT_FORMAT);
         this.end = LocalDateTime.parse(endDateTime, OUTPUT_FORMAT);
+    }
+
+    /**
+     * Checks whether this event conflicts with another event ask.
+     *
+     * @param other the task to check for a scheduling conflict.
+     * @return {@code true} if the other task is an {@code Event} with an
+     *         overlapping time range, {@code false} otherwise.
+     */
+    @Override
+    public boolean conflictsWith(Task other) {
+        if (other instanceof Event) {
+            Event otherEvent = (Event) other;
+            return this.start.isBefore(otherEvent.end) && this.end.isAfter(otherEvent.start);
+        }
+        return false;
     }
 
     /**
