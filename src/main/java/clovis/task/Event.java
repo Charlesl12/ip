@@ -73,7 +73,7 @@ public class Event extends Task {
      *     description, start date and time, and end date and time.
      */
     public String toFileFormat() {
-        return "D | " + (isDone ? "1" : "0") + " | " + description + " | "
+        return "E | " + (isDone ? "1" : "0") + " | " + description + " | "
                 + start.format(OUTPUT_FORMAT) + " | " + end.format(OUTPUT_FORMAT);
     }
 
