@@ -122,3 +122,4 @@ Clovis also helps you avoid scheduling conflicts by preventing overlapping deadl
 This ensures that tasks with time constraints do not clash with existing ones.
 
 ## With Clovis, your tasks stay organized!
+Start using Clovis to simplify your task management.
