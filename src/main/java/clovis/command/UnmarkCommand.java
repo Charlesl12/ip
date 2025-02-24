@@ -10,15 +10,19 @@ import clovis.task.TaskList;
  * The {@code UnmarkCommand} class handles the marking of a task in the task list as uncompleted.
  */
 public class UnmarkCommand extends Command {
-    protected int index;
+    private int index;
 
     /**
      * Constructs a {@code UnmarkCommand} instance with the specified index.
      *
      * @param index the index of the task to be marked as uncompleted.
      */
-    public UnmarkCommand(int index) {
-        this.index = index;
+    public UnmarkCommand(String index) throws ClovisException {
+        try {
+            this.index = Integer.parseInt(index);
+        } catch (NumberFormatException e) {
+            throw new ClovisException("Invalid input! Please enter a valid task number.\nExample: mark 2");
+        }
     }
 
     /**

@@ -12,6 +12,8 @@ Yes, it uses a Command Line Interface (CLI) while still having benefits of a Gra
 
 There are 3 types of tasks: Todos, Deadlines, and Events.
 
+Note that you cannot enter a date of the past.
+
 ### Adding a Todo: _todo_
 
 Adds a todo with the specified description to your task list.

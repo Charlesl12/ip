@@ -10,15 +10,19 @@ import clovis.task.TaskList;
  * The {@code DeleteCommand} class handles the deletion of a task from a task list.
  */
 public class DeleteCommand extends Command {
-    protected int index;
+    private int index;
 
     /**
      * Constructs a {@code DeleteCommand} instance with the specified index.
      *
      * @param index the index of the task to be deleted.
      */
-    public DeleteCommand(int index) {
-        this.index = index;
+    public DeleteCommand(String index) throws ClovisException {
+        try {
+            this.index = Integer.parseInt(index);
+        } catch (NumberFormatException e) {
+            throw new ClovisException("Invalid input! Please enter a valid task number.\nExample: mark 2");
+        }
     }
 
     /**

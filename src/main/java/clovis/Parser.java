@@ -86,11 +86,11 @@ public class Parser {
         case LIST:
             return new ListCommand();
         case MARK:
-            return new MarkCommand(Integer.parseInt(args));
+            return new MarkCommand(args);
         case UNMARK:
-            return new UnmarkCommand(Integer.parseInt(args));
+            return new UnmarkCommand(args);
         case DELETE:
-            return new DeleteCommand(Integer.parseInt(args));
+            return new DeleteCommand(args);
         case BYE:
             return new ExitCommand();
         default:

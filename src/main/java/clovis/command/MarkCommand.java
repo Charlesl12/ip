@@ -17,8 +17,12 @@ public class MarkCommand extends Command {
      *
      * @param index the index of the task to be marked as completed.
      */
-    public MarkCommand(int index) {
-        this.index = index;
+    public MarkCommand(String index) throws ClovisException {
+        try {
+            this.index = Integer.parseInt(index);
+        } catch (NumberFormatException e) {
+            throw new ClovisException("Invalid input! Please enter a valid task number.\nExample: mark 2");
+        }
     }
 
     /**
